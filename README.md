@@ -51,7 +51,7 @@ Using the Cookbooks
 
 Once your nodes are registered with your chef server, simply assign
 the appropriate roles to your nodes. Note that the nodes must be
-running the appropriate components fo openstack prior to installing
+running the appropriate components of openstack prior to installing
 the gridcentric components. If chef is being used to configure
 openstack as well, openstack roles must appear earlier in the node's
 run list than the gridcentric roles.
