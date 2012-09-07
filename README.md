@@ -59,11 +59,13 @@ run list than the gridcentric roles.
 For an all-in-one openstack cluster with a single node:
 
     knife node run_list add <node-name> "role[gridcentric-compute]"
+    knife node run_list add <node-name> "recipe[vms::disable_apparmor]"
     knife node run_list add <node-name> "role[gridcentric-api]"
 
 Openstack compute nodes:
 
     knife node run_list add <node-name> "role[gridcentric-compute]"
+    knife node run_list add <node-name> "recipe[vms::disable_apparmor]"
     
 Openstack api nodes:
 
