@@ -59,13 +59,11 @@ run list than the gridcentric roles.
 For an all-in-one openstack cluster with a single node:
 
     knife node run_list add <node-name> "role[gridcentric-compute]"
-    knife node run_list add <node-name> "recipe[vms::disable_apparmor]"
     knife node run_list add <node-name> "role[gridcentric-api]"
 
 Openstack compute nodes:
 
     knife node run_list add <node-name> "role[gridcentric-compute]"
-    knife node run_list add <node-name> "recipe[vms::disable_apparmor]"
     
 Openstack api nodes:
 
@@ -79,7 +77,29 @@ cluster:
 Openstack instances which will be used as VMS masters:
 
     knife node run_list add <node-name> "role[vms-guest]"
+    
+### Apparmor
+    
+Ubuntu 12.04 (Precise) ships with apparmor enabled by default and
+Openstack services come with apparmor profiles. Since VMS extends the
+Openstack compute service, this causes conflicts with the default
+compute service apparmor rules.  Apparmor needs to either be provided
+with rules which allow access to VMS resources or the apparmor profile
+for Openstack compute needs to be disabled. Two recipes are provided
+for dealing with apparmor:
 
+To add rules for VMS resources to apparmor, add the
+`vms::apparmor_rules` recipe to compute nodes:
+
+    knife node run_list add <compute-node-name> \
+        "recipe[vms::apparmor_rules]"
+
+To disable apparmor completely for the Openstack compute service, add
+the `vms::disable_apparmor` recipe to compute nodes:
+
+    knife node run_list add <compute-node-name> \
+        "recipe[vms::disable_apparmor]"
+        
 License
 =======
 
