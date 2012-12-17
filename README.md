@@ -17,7 +17,7 @@ Roles
 =====
 
 The `roles` directory contains chef roles.
-
+    
 Usage
 =====
 
@@ -77,7 +77,14 @@ cluster:
 Openstack instances which will be used as VMS masters:
 
     knife node run_list add <node-name> "role[vms-guest]"
-    
+
+Node attributes
+---------------
+
+There are several node attributes that can be tweaked available as `node["vms"]`.
+Principally, the OpenStack version is controller by `node["vms"]["os-version"]`.
+See [cookbooks/vms](cookbooks/vms) for more information on attributes.
+
 ### Apparmor
     
 Ubuntu 12.04 (Precise) ships with apparmor enabled by default and
