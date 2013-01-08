@@ -15,27 +15,22 @@ Usage
 
 These cookbooks were tested on chef 0.10.12. Install and configure
 your chef server and client. These instructions are assumed to be
-performed from a developer workstation with properly configured knife
-client for accessing your chef server.
+performed from a developer workstation with a properly configured
+knife client for accessing your chef server.
 
 Installation
 ------------
 
-Issue the following commands from the root of this git repository:
-
-    cd gridcentric-cookbooks
+To import the gridcentric cookbooks into your chef server:
 
 Upload the gridcentric cookbooks into your chef server:
 
+    cd gridcentric-cookbooks
     knife cookbook upload -o cookbooks --all
 
-Modify the repos.json data bag template with your private key. Then
-upload the gridcentric data bag to your chef server:
+Then, upload the roles to your chef server:
 
-    knife data bag from file gridcentric data_bags/gridcentric/*.json
-
-Finally, upload the roles to your chef server:
-
+    cd gridcentric-cookbooks
     knife role from file roles/*.rb
 
 Using the Cookbooks
@@ -69,17 +64,6 @@ cluster:
 Openstack instances which will be used as VMS masters:
 
     knife node run_list add <node-name> "role[vms-guest]"
-
-Node attributes
----------------
-
-* `node["vms"]["os-version"]` - Specifies the Openstack version to install
-  against.
-* `node["vms"]["sysconfig"][...]` - These attributes are vms configuration
-  parameters.  For an explanation of what these do, see the vms
-  documentation.
-* `node["vms"]["repo"][...]` - These attributes control how the gridcentric
-  software repositories are accessed during node setup.
 
 ### Apparmor
 
