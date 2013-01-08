@@ -1,6 +1,0 @@
-{
-    "id": "repos",
-    "base_url": "http://downloads.gridcentriclabs.com/packages"
-    "private_key": "your-private-key",
-    "public_key": "public"
-}
