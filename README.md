@@ -5,19 +5,11 @@ This repository contains chef cookbooks for deploying various
 Gridcentric technologies. These cookbooks are typically used with the
 opensource Chef server.
 
-Data Bags
-=========
-
-The `data_bags` directory contains templates for chef data bags used
-by the cookbooks. These should be modified with data pertaining to
-your deployment scenario and imported into your chef server prior to
-using the Gridcentric cookbooks.
-
 Roles
 =====
 
 The `roles` directory contains chef roles.
-    
+
 Usage
 =====
 
@@ -34,14 +26,14 @@ Issue the following commands from the root of this git repository:
     cd gridcentric-cookbooks
 
 Upload the gridcentric cookbooks into your chef server:
-    
+
     knife cookbook upload -o cookbooks --all
-    
+
 Modify the repos.json data bag template with your private key. Then
 upload the gridcentric data bag to your chef server:
 
     knife data bag from file gridcentric data_bags/gridcentric/*.json
-    
+
 Finally, upload the roles to your chef server:
 
     knife role from file roles/*.rb
@@ -64,16 +56,16 @@ For an all-in-one openstack cluster with a single node:
 Openstack compute nodes:
 
     knife node run_list add <node-name> "role[gridcentric-compute]"
-    
+
 Openstack api nodes:
 
     knife node run_list add <node-name> "role[gridcentric-api]"
-    
+
 External machines which will send VMS requests your VMS-enabled
 cluster:
 
     knife node run_list add <node-name> "role[gridcentric-client]"
-    
+
 Openstack instances which will be used as VMS masters:
 
     knife node run_list add <node-name> "role[vms-guest]"
@@ -81,12 +73,16 @@ Openstack instances which will be used as VMS masters:
 Node attributes
 ---------------
 
-There are several node attributes that can be tweaked available as `node["vms"]`.
-Principally, the OpenStack version is controller by `node["vms"]["os-version"]`.
-See [cookbooks/vms](cookbooks/vms) for more information on attributes.
+* `node["vms"]["os-version"]` - Specifies the Openstack version to install
+  against.
+* `node["vms"]["sysconfig"][...]` - These attributes are vms configuration
+  parameters.  For an explanation of what these do, see the vms
+  documentation.
+* `node["vms"]["repo"][...]` - These attributes control how the gridcentric
+  software repositories are accessed during node setup.
 
 ### Apparmor
-    
+
 Ubuntu 12.04 (Precise) ships with apparmor enabled by default and
 Openstack services come with apparmor profiles. Since VMS extends the
 Openstack compute service, this causes conflicts with the default
@@ -106,7 +102,7 @@ the `vms::disable_apparmor` recipe to compute nodes:
 
     knife node run_list add <compute-node-name> \
         "recipe[vms::disable_apparmor]"
-        
+
 License
 =======
 
