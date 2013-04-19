@@ -1,3 +1,6 @@
 [submodule "cookbooks/vms"]
 	path = cookbooks/vms
 	url = https://github.com/gridcentric/vms-cookbook.git
+[submodule "cookbooks/vms-collectd-plugins"]
+	path = cookbooks/vms-collectd-plugins
+	url = git@github.com:gridcentric/vms-collectd-plugins-cookbook
